@@ -11,6 +11,11 @@ const EmployeeTable = ({ employees, onDelete }) => (
           <th>Position</th>
           <th />
         </tr>
+        <tr>
+          <th></th>
+          <th><input placeholder="Search by level"></input></th>
+          <th><input placeholder="Search by position"></input></th>
+        </tr>
       </thead>
       <tbody>
         {employees.map((employee) => (
