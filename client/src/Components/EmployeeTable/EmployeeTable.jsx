@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./EmployeeTable.css";
 import { useState } from "react";
 
@@ -7,6 +7,8 @@ const EmployeeTable = ({ employees, onDelete }) => {
   const [level, setLevel] = useState('');
   const [position, setPosition] = useState('');
   const [rearranger, setRearranger] = useState('')
+  const [searchPhrase, setSearchPhrase] = useState('')
+  const navigate = useNavigate()
 
   const handleClick = (event) => {
     //console.log(event.target.value);
@@ -22,9 +24,9 @@ const EmployeeTable = ({ employees, onDelete }) => {
         return 1
       }
       return 0
-    } 
+    }
 
-    if (rearranger === "position"){
+    if (rearranger === "position") {
       if (a.position < b.position) {
         return -1
       }
@@ -80,6 +82,12 @@ const EmployeeTable = ({ employees, onDelete }) => {
     }
   }
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    navigate(`/employees/${searchPhrase}`);
+  }
+
+
   return (
     <div className="EmployeeTable">
       <table>
@@ -91,7 +99,11 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th>Rearrange employees by</th>
           </tr>
           <tr>
-            <th></th>
+            <th>
+              <form onSubmit={handleSearch}>
+                <input placeholder="Search by name" onChange={(event) => setSearchPhrase(event.target.value)} />
+              </form>
+            </th>
             <th><input placeholder="Search by level" onChange={(event) => setLevel(event.target.value)} /></th>
             <th><input placeholder="Search by position" onChange={(event) => setPosition(event.target.value)} /></th>
             <th>

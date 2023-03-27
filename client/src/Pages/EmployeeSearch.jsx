@@ -39,7 +39,7 @@ const EmployeeSearch = () => {
         return <Loading />;
     }
 
-    return <EmployeeTable employees={employees} setEmployees={setEmployees} onDelete={handleDelete}/>;
+    return <EmployeeTable employees={employees} onDelete={handleDelete}/>;
 };
 
 export default EmployeeSearch;
