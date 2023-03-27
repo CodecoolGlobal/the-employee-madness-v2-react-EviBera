@@ -31,6 +31,11 @@ app.post("/api/employees/", async (req, res, next) => {
   }
 });
 
+// search
+app.get("/api/employees/search/:searchPhrase", async (req, res) => {
+  const employees = await EmployeeModel.find( {name: {$regex : new RegExp(req.params.searchPhrase, "i")}});
+  return res.json(employees);
+});
 
 // api/employees/params
 app.get("/api/employees/:id", async (req, res) => {
