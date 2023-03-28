@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./EmployeeTable.css";
 import { useState } from "react";
 
-const EmployeeTable = ({ employees, onDelete }) => {
+const EmployeeTable = ({ employees, onDelete, getConfirmation, shouldDelete, setShouldDelete }) => {
 
   const [level, setLevel] = useState('');
   const [position, setPosition] = useState('');
@@ -133,9 +133,18 @@ const EmployeeTable = ({ employees, onDelete }) => {
                   <Link to={`/update/${employee._id}`}>
                     <button type="button">Update</button>
                   </Link>
-                  <button type="button" onClick={() => onDelete(employee._id)}>
+                  <button type="button" onClick={() => getConfirmation()}>
                     Delete
                   </button>
+                  {shouldDelete &&
+                    <div>
+                      <h2>Delete?</h2>
+                      <button type="button" onClick={() => onDelete(employee._id)}>Sure</button>
+                      <Link to={`/`}>
+                        <button type="button" onClick={setShouldDelete(false)}>No!</button>
+                      </Link>
+                    </div>
+                  }
                 </td>
               </tr>
             ))}
