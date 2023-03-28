@@ -1,3 +1,9 @@
 .EmployeeTable {
   padding: 0.5rem;
 }
+
+.delConfirm {
+  background-color: red;
+  font-size: xx-large;
+  font-weight: bolder;
+}

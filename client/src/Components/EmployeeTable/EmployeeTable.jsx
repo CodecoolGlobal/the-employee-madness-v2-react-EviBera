@@ -2,12 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import "./EmployeeTable.css";
 import { useState } from "react";
 
-const EmployeeTable = ({ employees, onDelete, getConfirmation, shouldDelete, setShouldDelete }) => {
+const EmployeeTable = ({ employees, onDelete }) => {
 
   const [level, setLevel] = useState('');
   const [position, setPosition] = useState('');
   const [rearranger, setRearranger] = useState('')
   const [searchPhrase, setSearchPhrase] = useState('')
+  const [idToDelete, setIdToDelete] = useState(null)
+  const [nameToDelete, setNameToDelete] = useState(null)
   const navigate = useNavigate()
 
   const handleClick = (event) => {
@@ -125,28 +127,35 @@ const EmployeeTable = ({ employees, onDelete, getConfirmation, shouldDelete, set
             .filter(employee => employee.level.toLowerCase().includes(level.toLowerCase()))
             .filter(employee => employee.position.toLowerCase().includes(position.toLowerCase()))
             .map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.name}</td>
-                <td>{employee.level}</td>
-                <td>{employee.position}</td>
-                <td>
-                  <Link to={`/update/${employee._id}`}>
-                    <button type="button">Update</button>
-                  </Link>
-                  <button type="button" onClick={() => getConfirmation()}>
-                    Delete
-                  </button>
-                  {shouldDelete &&
-                    <div>
-                      <h2>Delete?</h2>
-                      <button type="button" onClick={() => onDelete(employee._id)}>Sure</button>
-                      <Link to={`/`}>
-                        <button type="button" onClick={setShouldDelete(false)}>No!</button>
-                      </Link>
-                    </div>
-                  }
-                </td>
-              </tr>
+              <>
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.level}</td>
+                  <td>{employee.position}</td>
+                  <td>
+                    <Link to={`/update/${employee._id}`}>
+                      <button type="button">Update</button>
+                    </Link>
+                    <button type="button" onClick={() => { setIdToDelete(employee._id); setNameToDelete(employee.name) }}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                {employee._id === idToDelete ? (
+                  <tr key={employee.name} className="delConfirm">
+                    <td>Delete {nameToDelete}?</td>
+                    <td></td>
+                    <td><Link to={`/`}>
+                      <button type="button" onClick={() => { setIdToDelete(null) }}>No!</button>
+                    </Link>
+                    </td>
+                    <td>
+                      <button type="button" onClick={() => { onDelete(idToDelete) }}>Sure</button>
+                    </td>
+                  </tr>) 
+                  : (<></>)
+                }
+              </>
             ))}
         </tbody>
       </table>

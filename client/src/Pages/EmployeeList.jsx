@@ -15,21 +15,14 @@ const deleteEmployee = (id) => {
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
-  const [shouldDelete, setShouldDelete] = useState(false);
-
-  const getConfirmation = () => {
-    setShouldDelete(true)
-    console.log("setSouldDelete function activated");
-  }
 
   const handleDelete = (id) => {
-    console.log("Del button clicked");
-/*     deleteEmployee(id);
+    deleteEmployee(id);
 
     setEmployees((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
- */  };
+  };
 
   useEffect(() => {
     fetchEmployees()
@@ -43,7 +36,7 @@ const EmployeeList = () => {
     return <Loading />;
   }
 
-  return <EmployeeTable employees={employees} onDelete={handleDelete} getConfirmation={getConfirmation} shouldDelete={shouldDelete} setShouldDelete={setShouldDelete}/>;
+  return <EmployeeTable employees={employees} onDelete={handleDelete} />;
 };
 
 export default EmployeeList;
