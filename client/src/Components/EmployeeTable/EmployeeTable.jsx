@@ -113,8 +113,13 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th>
               <button type="button" onClick={handleNameSorting} className="grow">Name</button>
             </th>
+            <th>Favourite color</th>
             <th>Level</th>
             <th>Position</th>
+            <th>Starting date</th>
+            <th>Current salary</th>
+            <th>Desired salary</th>
+            <th>Difference</th>
             <th>Rearrange employees by</th>
           </tr>
           <tr>
@@ -123,8 +128,13 @@ const EmployeeTable = ({ employees, onDelete }) => {
                 <input placeholder="Search by name" onChange={(event) => setSearchPhrase(event.target.value)} />
               </form>
             </th>
+            <th></th>
             <th><input placeholder="Search by level" onChange={(event) => setLevel(event.target.value)} /></th>
             <th><input placeholder="Search by position" onChange={(event) => setPosition(event.target.value)} /></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>
               <form onClick={handleClick}>
                 <select name="arrangeOptions" id="arrangeOptions">
@@ -147,8 +157,15 @@ const EmployeeTable = ({ employees, onDelete }) => {
               <>
                 <tr key={employee._id}>
                   <td>{employee.name}</td>
+                  <td style={{display: "flex"}}>
+                    <button style={{backgroundColor: employee.favColor, height: "35px", borderRadius: "50%"}}></button>
+                    </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
+                  <td>{employee.startingDate}</td>
+                  <td>{employee.currentSalary.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                  <td>{employee.desiredSalary.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                  <td>{(employee.currentSalary - employee.desiredSalary).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>

@@ -29,6 +29,16 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       </div>
 
       <div className="control">
+        <label htmlFor="favColor">Favourite colour:</label>
+        <input
+          defaultValue={employee ? employee.favColor : null}
+          type="color"
+          name="favColor"
+          id="favColor"
+        />
+      </div>
+
+      <div className="control">
         <label htmlFor="level">Level:</label>
         <input
           defaultValue={employee ? employee.level : null}
@@ -43,6 +53,36 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           defaultValue={employee ? employee.position : null}
           name="position"
           id="position"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="startingDate">Starting date:</label>
+        <input
+          defaultValue={employee ? employee.startingDate : null}
+          type="date"
+          name="startingDate"
+          id="startingDate"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="currentSalary">Current salary:</label>
+        <input
+          defaultValue={employee ? employee.currentSalary : null}
+          type="number"
+          name="currentSalary"
+          id="currentSalary"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="desiredSalary">Desired salary:</label>
+        <input
+          defaultValue={employee ? employee.desiredSalary : null}
+          type="number"
+          name="desiredSalary"
+          id="desiredSalary"
         />
       </div>
 
