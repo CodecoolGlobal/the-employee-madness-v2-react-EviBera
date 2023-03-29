@@ -10,6 +10,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
   const [searchPhrase, setSearchPhrase] = useState('')
   const [idToDelete, setIdToDelete] = useState(null)
   const [nameToDelete, setNameToDelete] = useState(null)
+  const [nameClicked, setNameClicked] = useState(true)
   const navigate = useNavigate()
 
   const handleClick = (event) => {
@@ -44,6 +45,16 @@ const EmployeeTable = ({ employees, onDelete }) => {
       }
       if (a.name > b.name) {
         return 1
+      }
+      return 0
+    }
+
+    if (rearranger === "opposite") {
+      if (a.name < b.name) {
+        return 1
+      }
+      if (a.name > b.name) {
+        return -1
       }
       return 0
     }
@@ -89,13 +100,19 @@ const EmployeeTable = ({ employees, onDelete }) => {
     navigate(`/employees/${searchPhrase}`);
   }
 
+  const handleNameSorting = () => {
+    setNameClicked(!nameClicked)
+    nameClicked ? setRearranger("firstName") : setRearranger("opposite")
+  }
 
   return (
     <div className="EmployeeTable">
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>
+              <button type="button" onClick={handleNameSorting} className="grow">Name</button>
+            </th>
             <th>Level</th>
             <th>Position</th>
             <th>Rearrange employees by</th>
@@ -152,7 +169,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
                     <td>
                       <button type="button" onClick={() => { onDelete(idToDelete) }}>Sure</button>
                     </td>
-                  </tr>) 
+                  </tr>)
                   : (<></>)
                 }
               </>
