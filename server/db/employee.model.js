@@ -8,8 +8,8 @@ const EmployeeSchema = new Schema({
   level: String,
   position: String,
   startingDate: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: "01/01/1001",
   },
   currentSalary: Number,
   desiredSalary: Number,

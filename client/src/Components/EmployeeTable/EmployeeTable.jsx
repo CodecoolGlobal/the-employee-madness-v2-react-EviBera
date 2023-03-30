@@ -12,6 +12,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
   const [nameToDelete, setNameToDelete] = useState(null)
   const [nameClicked, setNameClicked] = useState(true)
   const navigate = useNavigate()
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   const handleClick = (event) => {
     //console.log(event.target.value);
@@ -105,6 +106,11 @@ const EmployeeTable = ({ employees, onDelete }) => {
     nameClicked ? setRearranger("firstName") : setRearranger("opposite")
   }
 
+  const dateModifier = (string) => {
+    let date = new Date(string);
+    return date.toLocaleDateString('en-US', options)
+  }
+
   return (
     <div className="EmployeeTable">
       <table>
@@ -162,7 +168,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
                   </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
-                  <td>{employee.startingDate}</td>
+                  <td>{dateModifier(employee.startingDate)}</td>
                   <td>{employee.currentSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                   <td>{employee.desiredSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                   <td>{(employee.currentSalary - employee.desiredSalary).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
