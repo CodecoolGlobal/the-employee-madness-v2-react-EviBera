@@ -157,15 +157,15 @@ const EmployeeTable = ({ employees, onDelete }) => {
               <>
                 <tr key={employee._id}>
                   <td>{employee.name}</td>
-                  <td style={{display: "flex"}}>
-                    <button style={{backgroundColor: employee.favColor, height: "35px", borderRadius: "50%"}}></button>
-                    </td>
+                  <td style={{ display: "flex" }}>
+                    <button style={{ backgroundColor: employee.favColor, height: "35px", borderRadius: "50%" }}></button>
+                  </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
                   <td>{employee.startingDate}</td>
-                  <td>{employee.currentSalary.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
-                  <td>{employee.desiredSalary.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
-                  <td>{(employee.currentSalary - employee.desiredSalary).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                  <td>{employee.currentSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                  <td>{employee.desiredSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                  <td>{(employee.currentSalary - employee.desiredSalary).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>
@@ -177,15 +177,18 @@ const EmployeeTable = ({ employees, onDelete }) => {
                 </tr>
                 {employee._id === idToDelete ? (
                   <tr key={employee.name} className="delConfirm">
-                    <td>Delete {nameToDelete}?</td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Delete {nameToDelete}?</td>
                     <td><Link to={`/`}>
                       <button type="button" onClick={() => { setIdToDelete(null) }}>No!</button>
                     </Link>
-                    </td>
-                    <td>
                       <button type="button" onClick={() => { onDelete(idToDelete) }}>Sure</button>
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>)
                   : (<></>)
                 }
