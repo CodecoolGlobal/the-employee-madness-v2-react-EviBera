@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const EquipmentModel = require("./db/equipment.model");
+const DivisionModel = require("./db/division.model");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -108,6 +109,48 @@ app.delete("/api/equipments/:id", async (req, res, next) => {
   try {
     const equipment = await EquipmentModel.findById(req.params.id);
     const deleted = await equipment.delete();
+    return res.json(deleted);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+//divisions
+app.get("/api/divisions/", async (req, res) => {
+  const divisions = await DivisionModel.find().sort({ created: "desc" });
+  return res.json(divisions);
+});
+
+app.post("/api/divisions/", async (req, res, next) => {
+  const division = req.body;
+
+  try {
+    const saved = await DivisionModel.create(division);
+    return res.json(saved);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+//divisions/params
+app.patch("/api/divisions/:id", async (req, res, next) => {
+  try {
+    const division = await DivisionModel.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { ...req.body } },
+      { new: true }
+    );
+    return res.json(division);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.delete("/api/divisions/:id", async (req, res, next) => {
+  try {
+    const division = await DivisionModel.findById(req.params.id);
+    const deleted = await division.delete();
     return res.json(deleted);
   } catch (err) {
     return next(err);

@@ -17,6 +17,10 @@ const EmployeeSchema = new Schema({
     type: String,
     default: "white"
   },
+  division: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Division'
+  },
   created: {
     type: Date,
     default: Date.now,
