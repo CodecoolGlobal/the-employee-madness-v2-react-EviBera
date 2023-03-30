@@ -134,6 +134,11 @@ app.post("/api/divisions/", async (req, res, next) => {
 });
 
 //divisions/params
+app.get("/api/divisions/:id", async (req, res) => {
+  const division = await DivisionModel.findById(req.params.id);
+  return res.json(division);
+});
+
 app.patch("/api/divisions/:id", async (req, res, next) => {
   try {
     const division = await DivisionModel.findOneAndUpdate(

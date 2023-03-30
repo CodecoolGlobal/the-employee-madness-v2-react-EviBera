@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "./EquipmentTable.css";
-import { useState } from "react";
 
 const EquipmentTable = ({ equipments, onDelete }) => {
 
