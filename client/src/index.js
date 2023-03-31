@@ -15,6 +15,7 @@ import EmployeeSearch from "./Pages/EmployeeSearch";
 import DivisionList from "./Pages/DivisionList";
 import DivisionCreator from "./Pages/DivisionCreator";
 import DivisionUpdater from "./Pages/DivisionUpdater";
+import TopPaidEmployees from './Pages/TopPaidEmployees'
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/divisions/update/:id",
         element: <DivisionUpdater />,
+      },
+      {
+        path: "top-paid",
+        element: <TopPaidEmployees />,
       },
     ],
   },

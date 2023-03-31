@@ -25,7 +25,7 @@ const populateEmployees = async () => {
     name,
     level: pick(levels),
     position: pick(positions),
-    currentSalary: pick(salaries),
+    currentSalary: Math.floor(Math.random() * (61 - 20) ) + 20,
     desiredSalary: pick(salaries),
   }));
 

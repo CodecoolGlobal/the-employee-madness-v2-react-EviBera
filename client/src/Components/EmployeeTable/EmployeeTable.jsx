@@ -122,6 +122,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th>Favourite color</th>
             <th>Level</th>
             <th>Position</th>
+            <th>Division</th>
             <th>Starting date</th>
             <th>Current salary</th>
             <th>Desired salary</th>
@@ -168,6 +169,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
                   </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
+                  <td>{employee.division}</td>
                   <td>{dateModifier(employee.startingDate)}</td>
                   <td>{employee.currentSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                   <td>{employee.desiredSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
