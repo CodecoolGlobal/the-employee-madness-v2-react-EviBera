@@ -15,7 +15,8 @@ import EmployeeSearch from "./Pages/EmployeeSearch";
 import DivisionList from "./Pages/DivisionList";
 import DivisionCreator from "./Pages/DivisionCreator";
 import DivisionUpdater from "./Pages/DivisionUpdater";
-import TopPaidEmployees from './Pages/TopPaidEmployees'
+import TopPaidEmployees from "./Pages/TopPaidEmployees";
+import DivisionPicker from "./Pages/DivisionPicker";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/employees/:search",
         element: <EmployeeSearch />,
+      },
+      {
+        path: "/employees/:id/assign",
+        element: <DivisionPicker />,
       },
       {
         path: "/table-test",

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./EmployeeTable.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 const EmployeeTable = ({ employees, onDelete }) => {
 
@@ -11,8 +12,16 @@ const EmployeeTable = ({ employees, onDelete }) => {
   const [idToDelete, setIdToDelete] = useState(null)
   const [nameToDelete, setNameToDelete] = useState(null)
   const [nameClicked, setNameClicked] = useState(true)
+  const [divisions, setDivisions] = useState([]);
   const navigate = useNavigate()
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  useEffect(() => {
+    fetch("/api/divisions")
+      .then((res) => res.json())
+      .then((data) => setDivisions(data))
+
+  }, [])
 
   const handleClick = (event) => {
     //console.log(event.target.value);
@@ -111,6 +120,18 @@ const EmployeeTable = ({ employees, onDelete }) => {
     return date.toLocaleDateString('en-US', options)
   }
 
+  // console.log(divisions.filter(division => division._id === "6426998ccc1b2a853a496a3a")[0].name);
+
+  const findTheDivisionName = (divisionId) => {
+    const divWeAreLookingFor = divisions.filter(division => division._id === divisionId)[0];
+    if (typeof divWeAreLookingFor === "undefined"){
+      return " "
+    } else {
+      return divWeAreLookingFor.name
+    }
+  }
+
+
   return (
     <div className="EmployeeTable">
       <table>
@@ -123,6 +144,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th>Level</th>
             <th>Position</th>
             <th>Division</th>
+            <th></th>
             <th>Starting date</th>
             <th>Current salary</th>
             <th>Desired salary</th>
@@ -138,6 +160,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th></th>
             <th><input placeholder="Search by level" onChange={(event) => setLevel(event.target.value)} /></th>
             <th><input placeholder="Search by position" onChange={(event) => setPosition(event.target.value)} /></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -169,7 +192,12 @@ const EmployeeTable = ({ employees, onDelete }) => {
                   </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
-                  <td>{employee.division}</td>
+                  <td>{findTheDivisionName(employee.division)}</td>
+                  <td>
+                    <Link to={`/employees/${employee._id}/assign`}>
+                      <button>Add or Modify division</button>
+                    </Link>
+                  </td>
                   <td>{dateModifier(employee.startingDate)}</td>
                   <td>{employee.currentSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                   <td>{employee.desiredSalary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
