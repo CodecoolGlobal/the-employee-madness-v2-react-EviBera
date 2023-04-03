@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const EquipmentModel = require("./db/equipment.model");
 const DivisionModel = require("./db/division.model");
+const ToolModel = require("./db/tool.model");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -161,6 +162,13 @@ app.delete("/api/divisions/:id", async (req, res, next) => {
     return next(err);
   }
 });
+
+//tools
+app.get("/api/tools/", async (req, res) => {
+  const tools = await ToolModel.find();
+  return res.json(tools);
+});
+
 
 // general connection orders
 const main = async () => {
