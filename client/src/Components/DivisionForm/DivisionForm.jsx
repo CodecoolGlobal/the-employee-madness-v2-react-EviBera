@@ -26,13 +26,13 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
           city,
           country
         }
-      }
+      };
 
       if (division) {
         divisionToSave._id = division._id
       }
   
-      return onSave(divisionToSave);
+      return onSave(divisionToSave, boss);
     };
   
     return (
