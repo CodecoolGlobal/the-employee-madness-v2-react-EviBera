@@ -14,7 +14,7 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
     .then(res => res.json())
     .then(data => setEmployees(data))
   }, [])
-  
+
 
     const onSubmit = (e) => {
       e.preventDefault();
@@ -26,21 +26,21 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
           city,
           country
         }
-      };
+      }
 
       if (division) {
         divisionToSave._id = division._id
       }
-  
-      return onSave(divisionToSave, boss);
+
+      return onSave(divisionToSave);
     };
-  
+
     return (
       <form className="DivisionForm" onSubmit={onSubmit}>
         {division && (
           <input type="hidden" name="_id" defaultValue={division._id} />
         )}
-  
+
         <div className="control">
           <label htmlFor="name">Name:</label>
           <input
@@ -50,7 +50,7 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
             id="name"
           />
         </div>
-  
+
         <div className="control">
           <label htmlFor="boss">Boss:</label>
           <select
@@ -61,7 +61,7 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
               {employees.map(employee => <option selected={division && division.boss._id === employee._id} value={employee._id} key={employee._id}>{employee.name}</option>)}
           </select>
         </div>
-  
+
         <div className="control">
           <label htmlFor="budget">Budget:</label>
           <input
@@ -91,12 +91,12 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
             id="country"
           />
         </div>
-  
+
         <div className="buttons">
           <button type="submit" disabled={disabled}>
             {division ? "Update Division" : "Create Division"}
           </button>
-  
+
           <button type="button" onClick={onCancel}>
             Cancel
           </button>
@@ -104,5 +104,5 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
       </form>
     );
   };
-  
+
   export default DivisionForm;

@@ -56,7 +56,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         />
       </div>
 
-      <div className="control">
+{/*       <div className="control">
         <label htmlFor="division">Division:</label>
         <input
           defaultValue={employee ? employee.division : null}
@@ -64,7 +64,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           id="division"
         />
       </div>
-
+ */}
       <div className="control">
         <label htmlFor="startingDate">Starting date:</label>
         <input
