@@ -169,6 +169,17 @@ app.get("/api/tools/", async (req, res) => {
   return res.json(tools);
 });
 
+app.post("/api/tools/", async (req, res, next) => {
+  const tool = req.body;
+
+  try {
+    const saved = await ToolModel.create(tool);
+    return res.json(saved);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 
 // general connection orders
 const main = async () => {

@@ -1,17 +1,20 @@
 import { useState } from "react";
 import "./ToolTable.css"
 
-const ToolTable = ({tools}) => {
+const ToolTable = ({tools, onSave}) => {
 
     const [name, setName] = useState("");
     const [newTool, setNewTool] = useState("");
     const [newWeight, setNewWeight] = useState("");
 
-    const createNewTool = () => {
+    const createNewTool = (event) => {
+        event.preventDefault();
         const toolToSave = {
-            newTool,
-            newWeight
+            "name": newTool,
+            "weight": newWeight
         }
+        console.log(toolToSave);
+        return onSave(toolToSave);
     }
 
     return (
@@ -43,6 +46,7 @@ const ToolTable = ({tools}) => {
             Add a new tool:
             <input placeholder="name" onChange={(event) => setNewTool(event.target.value)}></input>
             <input placeholder="weight" onChange={(event) => setNewWeight(event.target.value)}></input>
+            <button type="submit">Create</button>
           </form>
         </div >
       );
