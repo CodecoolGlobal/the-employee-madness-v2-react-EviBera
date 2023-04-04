@@ -17,7 +17,8 @@ import DivisionCreator from "./Pages/DivisionCreator";
 import DivisionUpdater from "./Pages/DivisionUpdater";
 import TopPaidEmployees from "./Pages/TopPaidEmployees";
 import DivisionPicker from "./Pages/DivisionPicker";
-import ToolList from "./Pages/ToolList"
+import ToolList from "./Pages/ToolList";
+import MissingEmployees from "./Pages/MissingEmployees";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: "/tools",
         element: <ToolList />
+      },
+      {
+        path: "/missing",
+        element: <MissingEmployees />
       },
     ],
   },

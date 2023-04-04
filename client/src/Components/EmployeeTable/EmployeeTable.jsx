@@ -3,7 +3,7 @@ import "./EmployeeTable.css";
 import { useState, useEffect } from "react";
 
 
-const EmployeeTable = ({ employees, onDelete }) => {
+const EmployeeTable = ({ employees, onDelete, handlePresence }) => {
 
   const [level, setLevel] = useState('');
   const [position, setPosition] = useState('');
@@ -131,6 +131,10 @@ const EmployeeTable = ({ employees, onDelete }) => {
     }
   }
 
+  const isItChecked = (employee) => {
+    if (employee.present)
+    return "checked"
+  }
 
   return (
     <div className="EmployeeTable">
@@ -143,6 +147,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th>Favourite color</th>
             <th>Level</th>
             <th>Position</th>
+            <th>Present?</th>
             <th>Division</th>
             <th></th>
             <th>Starting date</th>
@@ -193,6 +198,10 @@ const EmployeeTable = ({ employees, onDelete }) => {
                   </td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
+                  <td><form>
+                    <input type="checkbox" id={employee._id} name="present" checked={isItChecked(employee)} onChange={handlePresence}/>
+                  </form>
+                  </td>
                   <td>{findTheDivisionName(employee.division)}</td>
                   <td>
                     <Link to={`/employees/${employee._id}/assign`}>
@@ -217,12 +226,16 @@ const EmployeeTable = ({ employees, onDelete }) => {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>Delete {nameToDelete}?</td>
                     <td><Link to={`/`}>
                       <button type="button" onClick={() => { setIdToDelete(null) }}>No!</button>
                     </Link>
                       <button type="button" onClick={() => { onDelete(idToDelete) }}>Sure</button>
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
