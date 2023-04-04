@@ -40,6 +40,7 @@ const DivisionPicker = () => {
     return (
     <div>
         Select a division for {employee.name}!
+        <br></br>
         <select onClick={handleDivisionSelection}>
             <option value=""></option>
             {divisions.map(division => <option key={division._id} value={division._id}>{division.name}</option>)}
