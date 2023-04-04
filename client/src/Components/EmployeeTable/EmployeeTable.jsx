@@ -165,6 +165,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             <th>
               <form onClick={handleClick}>
                 <select name="arrangeOptions" id="arrangeOptions">

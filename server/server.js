@@ -119,7 +119,7 @@ app.delete("/api/equipments/:id", async (req, res, next) => {
 
 //divisions
 app.get("/api/divisions/", async (req, res) => {
-  const divisions = await DivisionModel.find().sort({ created: "desc" });
+  const divisions = await DivisionModel.find().populate({path: "boss"}).sort({ created: "desc" });
   return res.json(divisions);
 });
 
@@ -136,7 +136,7 @@ app.post("/api/divisions/", async (req, res, next) => {
 
 //divisions/params
 app.get("/api/divisions/:id", async (req, res) => {
-  const division = await DivisionModel.findById(req.params.id);
+  const division = await DivisionModel.findById(req.params.id).populate({path: "boss"});
   return res.json(division);
 });
 
