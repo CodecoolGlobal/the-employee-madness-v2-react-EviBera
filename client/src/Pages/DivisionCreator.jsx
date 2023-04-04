@@ -12,6 +12,16 @@ const createDivision = (division) => {
     }).then((res) => res.json());
 };
 
+const assaignBoss = (boss) => {
+    return fetch(`/api/employees/${boss._id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(boss)
+    }).then((res) => res.JSON())
+}
+
 const DivisionCreator = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
